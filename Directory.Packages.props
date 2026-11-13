@@ -1,0 +1,37 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Application & Validation -->
+    <PackageVersion Include="FluentValidation" Version="11.11.0" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+
+    <!-- Infrastructure & Database -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
+    <PackageVersion Include="EFCore.NamingConventions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.0.0" />
+
+    <!-- API & Observability -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="1.2.42" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.3" />
+    <PackageVersion Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
+
+    <!-- Testing -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="xunit" Version="2.9.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="FluentAssertions" Version="7.0.0" />
+    <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.0" />
+    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.0.0" />
+  
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+  </ItemGroup>
+</Project>
