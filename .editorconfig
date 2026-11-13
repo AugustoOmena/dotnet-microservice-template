@@ -1,0 +1,9 @@
+root = true
+
+[*.cs]
+# Suprime aviso de palavra reservada do VB.NET (ex: classe Error)
+dotnet_diagnostic.CA1716.severity = none
+
+# Preferências modernas de C#
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_prefer_braces = true:suggestion
