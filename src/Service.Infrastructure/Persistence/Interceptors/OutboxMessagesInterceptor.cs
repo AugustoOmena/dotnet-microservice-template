@@ -10,7 +10,8 @@ public sealed class OutboxMessagesInterceptor : SaveChangesInterceptor
 {
     private static readonly JsonSerializerOptions SerializerOptions = new()
     {
-        WriteIndented = false
+        WriteIndented = false,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
