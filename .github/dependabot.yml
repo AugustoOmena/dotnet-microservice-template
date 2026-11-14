@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # 1. Monitora e atualiza pacotes NuGet (Directory.Packages.props)
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      microsoft-and-efcore:
+        patterns:
+          - "Microsoft.*"
+          - "Npgsql.*"
+          - "EFCore.*"
+      testing-packages:
+        patterns:
+          - "xunit*"
+          - "FluentAssertions"
+          - "NSubstitute"
+          - "Testcontainers.*"
+          - "coverlet.*"
+
+  # 2. Monitora e atualiza GitHub Actions (quando criarmos o CI)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
