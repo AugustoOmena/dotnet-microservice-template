@@ -7,3 +7,7 @@ dotnet_diagnostic.CA1716.severity = none
 # Preferências modernas de C#
 csharp_style_namespace_declarations = file_scoped:warning
 csharp_prefer_braces = true:suggestion
+
+[tests/**/*.cs]
+# Permite underscores (_) na nomenclatura padrão de testes (Method_Scenario_ExpectedResult)
+dotnet_diagnostic.CA1707.severity = none
