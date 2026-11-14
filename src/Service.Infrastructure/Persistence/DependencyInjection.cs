@@ -55,15 +55,30 @@ public static class DependencyInjection
 
     private static void AddAuthentication(IServiceCollection services, IConfiguration configuration)
     {
-        var jwtOptions = configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>()
-            ?? new JwtOptions();
+        var jwtSection = configuration.GetSection(JwtOptions.SectionName);
+        var jwtOptions = jwtSection.Get<JwtOptions>()
+            ?? throw new InvalidOperationException($"Seção '{JwtOptions.SectionName}' não configurada.");
 
-        services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+        if (string.IsNullOrWhiteSpace(jwtOptions.SecretKey) || Encoding.UTF8.GetByteCount(jwtOptions.SecretKey) < 32)
+        {
+            throw new InvalidOperationException(
+                "A configuração 'Jwt:SecretKey' deve possuir no mínimo 32 bytes (256 bits) para assinatura HMAC-SHA256 segura.");
+        }
+
+        if (string.IsNullOrWhiteSpace(jwtOptions.Issuer) || string.IsNullOrWhiteSpace(jwtOptions.Audience))
+        {
+            throw new InvalidOperationException(
+                "As configurações 'Jwt:Issuer' e 'Jwt:Audience' são obrigatórias.");
+        }
+
+        services.Configure<JwtOptions>(jwtSection);
 
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
+                options.RequireHttpsMetadata = true;
+                options.SaveToken = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -72,8 +87,7 @@ public static class DependencyInjection
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtOptions.Issuer,
                     ValidAudience = jwtOptions.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtOptions.SecretKey.PadRight(32, '_'))),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey)),
                     ClockSkew = TimeSpan.Zero
                 };
             });
