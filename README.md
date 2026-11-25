@@ -1,10 +1,10 @@
-# .NET 9 Production-Ready Microservice Template
+# .NET 10 LTS Production-Ready Microservice Template
 
-[![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![.NET 10 LTS](https://img.shields.io/badge/.NET-10.0%20LTS-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![PostgreSQL 17](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2B%20DDD%20%2B%20Vertical%20Slices-success)](#arquitetura-e-camadas)
 
-Template arquitetural opinativo e pronto para produção voltado à construção de microsserviços distribuídos em **.NET 9**. Este repositório representa a **Fase 1** de uma plataforma de e-commerce distribuída, fornecendo o alicerce padronizado (observabilidade, persistência, resiliência, segurança e testes automatizados) para os serviços de domínio das Fases 2 e 3.
+Template arquitetural opinativo e pronto para produção voltado à construção de microsserviços distribuídos em **.NET 10 LTS**. Este repositório representa a **Fase 1** de uma plataforma de e-commerce distribuída, fornecendo o alicerce padronizado (observabilidade, persistência, resiliência, segurança e testes automatizados) para os serviços de domínio das Fases 2 e 3.
 
 ---
 
@@ -26,14 +26,14 @@ A solução adota **Clean Architecture** com inversão de dependência estrita, 
 
 ```text
 dotnet-microservice-template/
-├── Directory.Build.props            # Configurações globais de compilação e Analyzers (.NET 9)
+├── Directory.Build.props            # Configurações globais de compilação e Analyzers (.NET 10 LTS)
 ├── Directory.Packages.props         # Central Package Management (CPM)
 ├── docker-compose.yml               # Infraestrutura local (PostgreSQL 17)
 ├── src/
 │   ├── BuildingBlocks.Core/         # Primitivas puras: Entity, AggregateRoot, ValueObject, IDomainEvent, Result<T>
 │   ├── Service.Domain/              # Entidades ricas, invariantes de negócio, Domain Events e erros tipados
 │   ├── Service.Application/         # Casos de uso (Vertical Slices), Dispatcher CQRS próprio e Pipeline Behaviors
-│   ├── Service.Infrastructure/      # EF Core 9 + PostgreSQL, SaveChangesInterceptors (Auditoria/Outbox) e JWT
+│   ├── Service.Infrastructure/      # EF Core 10 + PostgreSQL, SaveChangesInterceptors (Auditoria/Outbox) e JWT
 │   └── Service.API/                 # Minimal APIs auto-descobertas, RFC 9457 ProblemDetails, Scalar e HealthChecks
 └── tests/
     ├── Service.UnitTests/           # Testes de domínio e invariantes (xUnit + FluentAssertions)
@@ -119,8 +119,8 @@ Essa separação atende às necessidades de orquestradores como Kubernetes e ECS
 
 | Categoria            | Tecnologia / Pacote                                             | Finalidade                                                           |
 | -------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Runtime & Linguagem  | .NET 9 / C# 13                                                  | Plataforma principal com analyzers estritos ativados                 |
-| Banco de Dados & ORM | PostgreSQL 17, EF Core 9, Npgsql, EFCore.NamingConventions      | Persistência relacional com convenção snake_case automática          |
+| Runtime & Linguagem  | .NET 10 LTS / C# 14                                             | Plataforma principal com analyzers estritos ativados                 |
+| Banco de Dados & ORM | PostgreSQL 17, EF Core 10, Npgsql, EFCore.NamingConventions     | Persistência relacional com convenção snake_case automática          |
 | Validação            | FluentValidation                                                | Regras de entrada desacopladas executadas no pipeline CQRS           |
 | Resiliência HTTP     | Microsoft.Extensions.Http.Resilience (Polly v8)                 | Políticas de retry, timeout e circuit breaker para chamadas externas |
 | Documentação & Logs  | Microsoft.AspNetCore.OpenApi, Scalar.AspNetCore, Serilog        | Contrato OpenAPI 3.1, UI moderna e logging estruturado               |
@@ -132,7 +132,7 @@ Essa separação atende às necessidades de orquestradores como Kubernetes e ECS
 
 ### Pré-requisitos
 
-- .NET 9 SDK
+- .NET 10 SDK
 - Docker
 - Docker Compose
 
@@ -232,4 +232,4 @@ Validação de trade-offs arquiteturais e decisões técnicas:
 
 ### Validação Determinística
 
-Todo código sugerido foi submetido aos analisadores estáticos do .NET 9 (`AnalysisLevel: latest-recommended`, com 0 warnings), compilado e validado por testes automatizados contra instâncias reais do PostgreSQL via Testcontainers.
+Todo código sugerido foi submetido aos analisadores estáticos do .NET 10 (`AnalysisLevel: latest-recommended`, com 0 warnings), compilado e validado por testes automatizados contra instâncias reais do PostgreSQL via Testcontainers.

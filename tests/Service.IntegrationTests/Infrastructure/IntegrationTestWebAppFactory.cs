@@ -12,11 +12,10 @@ namespace Service.IntegrationTests.Infrastructure;
 
 public sealed class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
-        .WithImage("postgres:17-alpine")
+    private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder("postgres:17-alpine")
         .WithDatabase("microservice_test_db")
-        .WithUsername("test_user")
-        .WithPassword("TestPassword123!")
+        .WithUsername("postgres")
+        .WithPassword("postgres")
         .Build();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)

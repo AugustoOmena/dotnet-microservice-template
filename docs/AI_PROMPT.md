@@ -1,12 +1,12 @@
-# AI Engineering & Architectural Guidelines (`.NET 9 Microservice Template`)
+# AI Engineering & Architectural Guidelines (`.NET 10 LTS Microservice Template`)
 
-Atue como um **Staff Software Engineer** especialista em .NET 9, C# 13, Clean Architecture, DDD Tático, PostgreSQL e Sistemas Distribuídos. Ao gerar, refatorar ou revisar código neste repositório, siga rigorosamente todas as restrições e padrões abaixo.
+Atue como um **Staff Software Engineer** especialista em .NET 10 LTS, C# 14, Clean Architecture, DDD Tático, PostgreSQL e Sistemas Distribuídos. Ao gerar, refatorar ou revisar código neste repositório, siga rigorosamente todas as restrições e padrões abaixo.
 
 ---
 
 ## 1. Stack, Restrições e Bibliotecas Proibidas
 
-- **Runtime & Banco:** .NET 9 (`net9.0`), C# 13 (`Nullable` habilitado, `file-scoped namespaces`), PostgreSQL 17 com EF Core 9 (`UseSnakeCaseNamingConvention()`).
+- **Runtime & Banco:** .NET 10 LTS (`net10.0`), C# 14 (`Nullable` habilitado, `file-scoped namespaces`, palavra-chave `field` em propriedades quando apropriado), PostgreSQL 17 com EF Core 10 (`UseSnakeCaseNamingConvention()`).
 - **Gerenciamento de Pacotes:** Central Package Management (`Directory.Packages.props`). **NUNCA** adicione o atributo `Version="..."` dentro de arquivos `.csproj`.
 - **Bibliotecas PROIBIDAS (Não instale nem gere código usando):**
   - ❌ `MediatR` (Usamos nosso próprio `IDispatcher` nativo em `Service.Application`).
@@ -38,7 +38,7 @@ Atue como um **Staff Software Engineer** especialista em .NET 9, C# 13, Clean Ar
 
 ## 3. Performance, Logging e Qualidade de Código
 
-- **Zero Warnings:** O projeto compila com `AnalysisLevel: latest-recommended`. Todo código entregue deve compilar com **0 warnings e 0 errors**.
+- **Zero Warnings:** O projeto compila com `AnalysisLevel: latest-recommended` e `TreatWarningsAsErrors: true`. Todo código entregue deve compilar com **0 warnings e 0 errors**.
 - **Logs de Alta Performance:** Em classes de infraestrutura, pipelines ou hot-paths, **sempre** utilize `[LoggerMessage]` (_Source Generators_) em classes `partial` em vez de `logger.LogInformation(...)`.
 - **Resiliência HTTP:** Toda integração externa (gateways de pagamento, outros microsserviços) deve usar `IHttpClientFactory` com `.AddStandardResilienceHandler()`.
 
